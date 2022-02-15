@@ -1,5 +1,5 @@
 module.exports = {
-  recipeNotFound: {
+  taskNotFound: {
     code: 404,
     message: 'recipe not found',
   },

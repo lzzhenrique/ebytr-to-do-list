@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongodb');
 const { find } = require('../../models')('tasks');
-const { recipeNotFound } = require('../../validations/errObjs/taskErrs');
+const { taskNotFound } = require('../../validations/errObjs/taskErrs');
 
 module.exports = async (id) => {
   if (!id) {
@@ -8,11 +8,11 @@ module.exports = async (id) => {
     return getTasks;
   }
 
-  if (!ObjectId.isValid(id)) return { error: recipeNotFound };
+  if (!ObjectId.isValid(id)) return { error: taskNotFound };
 
   const getTaskById = await find(id);
 
-  if (!getTaskById) return { error: recipeNotFound };
+  if (!getTaskById) return { error: taskNotFound };
 
   return getTaskById;
 };
