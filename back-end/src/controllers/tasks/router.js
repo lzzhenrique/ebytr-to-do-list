@@ -1,5 +1,5 @@
 const express = require('express');
-const find = require('./create');
+const find = require('./find');
 const create = require('./create');
 const auth = require('../../middlewares/auth');
 

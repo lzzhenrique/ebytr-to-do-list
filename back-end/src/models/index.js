@@ -1,7 +1,9 @@
-const getByEmail = require('./getByEmail');
-const createModel = require('./create');
+const getUserByEmail = require('./getUserByEmail');
+const createEntity = require('./create');
+const findEntity = require('./find');
 
 module.exports = (collection) => ({
-  getByEmail: (email) => getByEmail(collection, email),
-  create: (entity) => createModel(collection, entity),
+  getByEmail: (email) => getUserByEmail(collection, email),
+  create: (entity) => createEntity(collection, entity),
+  find: (id) => findEntity(collection, id),
 });
