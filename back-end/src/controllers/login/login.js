@@ -1,17 +1,17 @@
-const loginService = require('../../services/login');
+const { login } = require('../../services/login');
 
-const login = async (req, res, next) => {
+const newLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const createToken = await loginService.login({ email, password });
+    const token = await login({ email, password });
 
-    if ('error' in createToken) return next(createToken.error);
+    if ('error' in token) return next(token.error);
 
-    return res.status(200).json(createToken);
+    return res.status(200).json(token);
   } catch (e) {
       next(e);
   }
 };
 
-module.exports = login;
+module.exports = newLogin;

@@ -1,9 +1,11 @@
-const jwt = require('jsonwebtoken');
+const JWT = require('jsonwebtoken');
 const { getByEmail } = require('../../models')('users');
+
 const loginSchema = require('../../validations/joiSchemas/login');
 const errObj = require('../../validations/errObjs/loginErrs');
 
 const JWT_CONFIG = { expiresIn: '7d', algorithm: 'HS256' };
+
 const { emailOrPasswordNotExist } = errObj;
 const { LOGIN_SECRET } = process.env;
 
@@ -14,13 +16,13 @@ module.exports = async (user) => {
     return { error };
   }
 
-  const verifyEmail = await getByEmail(user.email);
+  const emailExists = await getByEmail(user.email);
 
-  if (!verifyEmail) return { error: emailOrPasswordNotExist };
+  if (!emailExists) return { error: emailOrPasswordNotExist };
 
-  const { password, name, ...userWithoutPasswordAndName } = verifyEmail;
+  const { password, name, ...userWithoutPasswordAndName } = emailExists;
 
-  const token = jwt.sign({ data: userWithoutPasswordAndName }, LOGIN_SECRET, JWT_CONFIG);
+  const token = JWT.sign({ data: userWithoutPasswordAndName }, LOGIN_SECRET, JWT_CONFIG);
 
   return { token };
 };
