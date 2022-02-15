@@ -15,27 +15,3 @@ const login = async (req, res, next) => {
 };
 
 module.exports = login;
-
-// const createToken = async (user) => {
-//   const { email, password } = user;
-
-//   const verifyUser = await getUserByEmail({ email, password });
-
-//   if (!verifyUser) {
-//     return {
-//       error: {
-//         status: StatusCodes.NOT_FOUND,
-//         message: 'Não existe usuário com esse e-mail ou senha.',
-//       },
-//     };
-//   }
-
-//   const token = JWT.sign({ data: verifyUser }, process.env.LOGIN_SECRET, JWT_CONFIG);
-
-//   return {
-//     token,
-//     user: {
-//       ...verifyUser,
-//     },
-//   };
-// };
