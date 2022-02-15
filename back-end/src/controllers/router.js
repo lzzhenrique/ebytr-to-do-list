@@ -1,10 +1,12 @@
 const express = require('express');
-const users = require('./users/router');
+const user = require('./users/router');
 const login = require('./login/router');
+const task = require('./tasks/router');
 
 const root = express.Router({ mergeParams: true });
 
-root.use('/users', users);
+root.use('/new-user', user);
 root.use('/login', login);
+root.use('/task', task);
 
 module.exports = root;
