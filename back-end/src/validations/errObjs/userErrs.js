@@ -15,4 +15,8 @@ module.exports = {
     code: 401,
     message: 'Missing auth token',
   },
+  userNotAuthorized: {
+    code: 401,
+    message: 'You don\'t have authorization to edit this task!',
+  },
 };
