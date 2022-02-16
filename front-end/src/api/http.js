@@ -19,28 +19,33 @@ const http = {
       return error.response.status;
     }
   },
-  getAllTasks: async () => {
+  getAllTasks: async (token) => {
     try {
-      const response = await api.get('/task');
-      return response.data;
-    } catch (error) {
-      return error.response.status;
-    }
-  },
-  getTaskById: async (id) => {
-    try {
-      const response = await api.get(`/task/:${id}`);
-      return response.data;
-    } catch (error) {
-      return error.response.status;
-    }
-  },
-  createTask: async ({ task, token }) => {
-    try {
-      const response = await api.post('/task', {
-        data: { ...task },
+      const response = await api.get('/task', {
         headers: { authorization: token },
       });
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
+  getTaskById: async (id, token) => {
+    try {
+      const response = await api.get(`/task/:${id}`, {
+        headers: { authorization: token },
+      });
+      return response.data;
+    } catch (error) {
+      return error.response.status;
+    }
+  },
+  createTask: async ({ taskWithCreatedAt, token }) => {
+    try {
+      const response = await api.post('/task',
+        { ...taskWithCreatedAt },
+        {
+          headers: { authorization: token },
+        });
       return response.data;
     } catch (error) {
       return error.response.status;
@@ -48,16 +53,17 @@ const http = {
   },
   editTask: async ({ task, token, id }) => {
     try {
-      const response = await api.put(`task/${id}`, {
-        data: { ...task },
-        headers: { authorization: token },
-      });
+      const response = await api.put(`task/${id}`,
+        { ...task },
+        {
+          headers: { authorization: token },
+        });
       return response.data;
     } catch (error) {
       return error.response.status;
     }
   },
-  deleteTask: async ({ id }) => {
+  deleteTask: async ({ id, token }) => {
     try {
       const response = await api.delete(`task/${id}`, {
         headers: { authorization: token },

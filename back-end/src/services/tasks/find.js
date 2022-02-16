@@ -3,7 +3,6 @@ const { find } = require('../../models')('tasks');
 const { taskNotFound } = require('../../validations/errObjs/taskErrs');
 
 module.exports = async ({ postId, userId }) => {
-  console.log(postId, userId);
   if (!postId) {
     const getTasks = await find({ userId });
     return getTasks;

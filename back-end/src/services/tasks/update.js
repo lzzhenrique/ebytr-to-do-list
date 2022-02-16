@@ -5,10 +5,12 @@ const { userNotAuthorized } = require('../../validations/errObjs/userErrs');
 module.exports = async (task) => {
   const { postId, userId, ...taskWithoutIdAndUserId } = task;
   const { error } = taskSchema.validate(taskWithoutIdAndUserId);
-
-  const userAuthorized = await find(postId);
+  
+  const userAuthorized = await find({ postId });
   
   if (userAuthorized.userId !== userId) return { error: userNotAuthorized };
+
+  console.log('Passei do que tu imaginou');
 
   if (error) {
     error.details[0].status = 400;
