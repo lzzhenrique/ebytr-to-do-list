@@ -1,13 +1,15 @@
 const { ObjectId } = require('mongodb');
 const connection = require('./connection');
 
-module.exports = async (collection, id) => {
-  if (!id) {
-    const findAllTasks = (await connection.connect()).collection(collection).find({}).toArray();
-    return findAllTasks;
+module.exports = async (collection, { userId, postId }) => {
+  if (!postId) {
+    const findAllTasksByUserId = (await connection.connect()).collection(collection).find({
+      userId,
+    }).toArray();
+    return findAllTasksByUserId;
   }
 
-  const findTaskById = (
-    await connection.connect()).collection(collection).findOne({ _id: ObjectId(id) });
-  return findTaskById;
+  const findTaskByPostId = (
+    await connection.connect()).collection(collection).findOne({ _id: ObjectId(postId) });
+  return findTaskByPostId;
 };
