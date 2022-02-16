@@ -1,0 +1,23 @@
+.form-task {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.task-inputs {
+  display: flex;
+}
+
+.task-input {
+  padding: 2rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.login-button {
+  margin: 1rem;
+  padding: 1rem;
+}
