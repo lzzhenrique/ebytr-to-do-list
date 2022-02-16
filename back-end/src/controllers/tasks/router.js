@@ -9,7 +9,7 @@ const router = express.Router({ mergeParams: true });
 
 router.delete('/:id', auth, remove);
 router.put('/:id', auth, update);
-router.get('/:id', find);
-router.get('/', find);
+router.get('/:id', auth, find);
+router.get('/', auth, find);
 router.post('/', auth, create);
 module.exports = router;
