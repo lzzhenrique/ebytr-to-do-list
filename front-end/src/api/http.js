@@ -53,10 +53,11 @@ const http = {
   },
   editTask: async ({ task, token, id }) => {
     try {
-      const response = await api.put(`task/${id}`, {
-        data: { ...task },
-        headers: { authorization: token },
-      });
+      const response = await api.put(`task/${id}`,
+        { ...task },
+        {
+          headers: { authorization: token },
+        });
       return response.data;
     } catch (error) {
       return error.response.status;

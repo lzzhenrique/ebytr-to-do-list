@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import EditTask from './EditTask';
 import http from '../api/http';
 
 function Task(
   { task: { createdAt, deadline, description, status, title, _id: id }, attTasks },
 ) {
-  console.log(attTasks);
   const token = localStorage.getItem('token');
+
+  const [task] = useState({
+    createdAt,
+    deadline,
+    description,
+    status,
+    title,
+    _id: id,
+  });
+  const [editMode, setEditMode] = useState(false);
 
   const deleteTask = async () => {
     await http.deleteTask({ token, id });
@@ -27,15 +37,25 @@ function Task(
       <div className="task-buttons" />
       <button
         type="button"
-      >
-        Edit Task
-      </button>
-      <button
-        type="button"
         onClick={ () => deleteTask() }
       >
         Remove Task
       </button>
+      <button
+        type="button"
+        onClick={ () => setEditMode(true) }
+      >
+        Edit Task
+      </button>
+      {
+        editMode ? (
+          <EditTask
+            task={ task }
+            attTasks={ attTasks }
+            setEditMode={ setEditMode }
+          />
+        ) : ''
+      }
     </div>
   );
 }
@@ -53,5 +73,3 @@ Task.propTypes = {
   }).isRequired,
   attTasks: PropTypes.func.isRequired,
 };
-
-// userId: "620ce1b3f6ec01ddb49ede2e"
