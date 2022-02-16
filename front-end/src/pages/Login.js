@@ -2,25 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../api/http';
 
+require('react-dom');
+
 function Login() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({ password: '', email: '' });
   const [disabledButton, setdisabledButton] = useState(true);
 
   useEffect(() => {
     const { password, email } = loginData;
 
-    if (password && email) setdisabledButton(false);
+    if (password && email) return setdisabledButton(false);
 
     setdisabledButton(true);
   }, [loginData]);
 
-  function makeLogin() {
-    const login = http.login(loginData);
-    console.log(login);
+  async function makeLogin() {
+    const login = await http.login(loginData);
+
+    if ('token' in login) {
+      localStorage.setItem('token', login.token);
+      navigate('/home');
+    }
   }
 
-  function handleChange(name, value) {
+  function handleChange({ name, value }) {
     setLoginData({ ...loginData, [name]: value });
   }
 
@@ -32,13 +38,13 @@ function Login() {
           name="email"
           type="text"
           placeholder="email"
-          onChange={ (e) => handleChange(e.target.value) }
+          onChange={ (e) => handleChange(e.target) }
         />
         <input
           name="password"
           type="text"
           placeholder="password"
-          onChange={ (e) => handleChange(e.target.value) }
+          onChange={ (e) => handleChange(e.target) }
         />
       </div>
       <button
