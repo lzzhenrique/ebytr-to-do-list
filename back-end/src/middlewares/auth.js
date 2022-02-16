@@ -1,6 +1,5 @@
 const JWT = require('jsonwebtoken');
-const { getByEmail } = require('../models')('users');
-const { invalidToken, badToken, userNotFound } = require('../validations/errObjs/userErrs');
+const { invalidToken, badToken } = require('../validations/errObjs/userErrs');
 
 const { LOGIN_SECRET } = process.env;
 
@@ -10,22 +9,10 @@ const jwtVerify = async (token) => {
   return data;
 };
 
-const validateUser = async (token, email, password) => {
-  if (!token) return invalidToken;
-  
-  const userExists = await getByEmail(email);
-  if (!userExists || password !== userExists.password) return userNotFound;
-
-  return { validUser: true };
-};
-
 const main = async (req, _res, next) => {
   try {
     const { authorization: token } = req.headers;
-    const { email, password } = req.body;
-
-    const validatedUserData = await validateUser(token, email, password);
-    if ('code' in validatedUserData) next(validatedUserData);
+    if (!token) return next(invalidToken);
 
     const userJWTData = await jwtVerify(token);
 
