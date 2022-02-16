@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../api/http';
 
-require('react-dom');
+const PASSWORD_MIN_LENGTH = 8;
 
 function Login() {
   const navigate = useNavigate();
@@ -12,6 +12,7 @@ function Login() {
   useEffect(() => {
     const { password, email } = loginData;
 
+    if (password.length < PASSWORD_MIN_LENGTH) return setdisabledButton(true);
     if (password && email) return setdisabledButton(false);
 
     setdisabledButton(true);
@@ -49,6 +50,7 @@ function Login() {
       </div>
       <button
         type="button"
+        onClick={ () => navigate('/register') }
       >
         Registrar-se
       </button>

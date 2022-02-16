@@ -5,7 +5,6 @@ const api = axios.create({ baseURL: 'http://localhost:3001' });
 const http = {
   login: async ({ email, password }) => {
     try {
-      console.log(email, password);
       const response = await api.post('/login', { email, password });
       return response.data;
     } catch (error) {
