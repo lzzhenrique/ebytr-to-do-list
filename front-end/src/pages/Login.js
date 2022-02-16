@@ -46,7 +46,7 @@ function Login() {
         <input
           className="login-input"
           name="password"
-          type="text"
+          type="password"
           placeholder="Password"
           onChange={ (e) => handleChange(e.target) }
         />
@@ -54,18 +54,18 @@ function Login() {
       <div className="login-buttons">
         <button
           className="login-button"
+          type="button"
+          onClick={ () => navigate('/register') }
+        >
+          Registrar-se
+        </button>
+        <button
+          className="login-button"
           disabled={ disabledButton }
           onClick={ () => makeLogin() }
           type="button"
         >
           Entrar
-        </button>
-        <button
-          className="login-button"
-          type="button"
-          onClick={ () => navigate('/register') }
-        >
-          Registrar-se
         </button>
       </div>
     </div>

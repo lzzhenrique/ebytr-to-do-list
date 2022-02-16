@@ -46,9 +46,9 @@ function Task(
         </button>
         <button
           type="button"
-          onClick={ () => setEditMode(true) }
+          onClick={ () => setEditMode(!editMode) }
         >
-          Edit Task
+          Edit task
         </button>
       </div>
       {

@@ -34,19 +34,22 @@ function TaskMaker({ attTasks }) {
         htmlFor={ title }
         key={ index }
       >
+        <p className="input-title">
+          { title === 'deadline' ? 'Due date' : title}
+        </p>
         <input
           className="task-input"
           name={ title }
           onChange={ (e) => newTaskHandler(e.target) }
           type={ title === 'deadline' ? 'date' : 'text' }
-          placeholder={ `${title} of your task here` }
+          placeholder={ `${title} of your task` }
         />
       </label>
     ));
   };
 
   const renderOptions = () => {
-    const statusOptions = ['pending', 'in progress', 'ready'];
+    const statusOptions = ['Pending', 'In progress', 'Ready'];
 
     return statusOptions.map((option, index) => (
       <option value={ option } key={ index }>{option}</option>

@@ -1,23 +1,29 @@
 .form-task {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .task-inputs {
   display: flex;
+  text-align: center;
 }
 
 .task-input {
-  padding: 2rem;
-  margin: 1rem;
+  cursor: pointer;
   border: none;
   border-radius: 20px;
-  cursor: pointer;
+  margin: 1rem;
+  padding: 2rem;
 }
 
 .login-button {
   margin: 1rem;
   padding: 1rem;
+}
+
+.input-title {
+  margin: 0;
+  padding: 0;
 }

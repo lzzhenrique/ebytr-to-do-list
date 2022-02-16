@@ -1,23 +1,21 @@
-::placeholder {
-  font-size: medium;
+span {
+  color: white;
 }
 
-.login-container {
+.register-container {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
 
-.login-div {
-  margin-top: 4rem;
+.register-div {
+  margin-top: 5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
 
-.login-input {
+.register-input {
   padding: 1rem;
   width: 15rem;
   height: 2rem;
@@ -26,3 +24,4 @@
   border-radius: 10px;
   text-align: center;
 }
+
