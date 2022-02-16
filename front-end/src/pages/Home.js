@@ -18,15 +18,21 @@ function Home() {
     getAllTasks();
   }, []);
 
+  const attTasks = async () => {
+    const result = await http.getAllTasks(token);
+    setUserTasks(result);
+  };
+
   if (loading) return <h1>Carregando</h1>;
 
   return (
     <div>
       <h1>Ebytr</h1>
-
       <div>
         <div className="task-maker-container">
-          <TaskMaker />
+          <TaskMaker
+            attTasks={ attTasks }
+          />
         </div>
         <div className="tasks-container">
           {
@@ -34,6 +40,7 @@ function Home() {
               <Task
                 taskInfo={ taskInfo }
                 key={ index }
+                a={ index }
               />
             ))
           }

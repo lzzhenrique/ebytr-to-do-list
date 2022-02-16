@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function TaskMaker() {
+function Task({ a }) {
   return (
-    <h1>We are the Tasks</h1>
+    <h1>{a}</h1>
   );
 }
 
-export default TaskMaker;
+export default Task;
+
+Task.propTypes = {
+  a: PropTypes.number.isRequired,
+};

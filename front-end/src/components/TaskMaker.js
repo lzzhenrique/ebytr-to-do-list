@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import http from '../api/http';
 
-function TaskMaker() {
+function TaskMaker({ attTasks }) {
+  const token = localStorage.getItem('token');
   const [newTask, setNewTask] = useState({
     title: '',
     description: '',
     deadline: '',
     status: 'pending',
   });
-  const token = localStorage.getItem('token');
+  const [disabledButton, setdisabledButton] = useState(true);
+
+  useEffect(() => {
+    const { title, description, deadline } = newTask;
+
+    if (title && description && deadline) return setdisabledButton(false);
+
+    setdisabledButton(true);
+  }, [newTask]);
 
   const newTaskHandler = ({ name, value }) => {
     setNewTask({ ...newTask, [name]: value });
@@ -46,6 +56,8 @@ function TaskMaker() {
     const taskWithCreatedAt = { ...newTask, createdAt };
 
     await http.createTask({ token, taskWithCreatedAt });
+
+    attTasks();
   };
 
   return (
@@ -59,6 +71,7 @@ function TaskMaker() {
       </select>
       <button
         type="button"
+        disabled={ disabledButton }
         onClick={ () => createTask() }
       >
         Add your task!
@@ -68,3 +81,7 @@ function TaskMaker() {
 }
 
 export default TaskMaker;
+
+TaskMaker.propTypes = {
+  attTasks: PropTypes.func.isRequired,
+};

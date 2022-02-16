@@ -4,8 +4,6 @@ module.exports = joi.object({
   title: joi.string()
   .required()
   .messages({
-    'string.min': 'Title needs to be at least 5 caracters',
-    'string.max': 'Title needs to be at max 50 caracters',
     'any.empty': 'Title is required!',
     'string.required': 'Title needs to be a string',
   }),
