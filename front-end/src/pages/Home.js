@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Task, TaskMaker } from '../components';
+import './style/home.css';
 
 import http from '../api/http';
 
@@ -27,8 +28,13 @@ function Home() {
 
   return (
     <div>
-      <h1>Ebytr</h1>
+      <div className="name-container">
+        <h1 className="name">Ebytr</h1>
+      </div>
       <div>
+        <div className="subtitle">
+          <h2>Add your task here!</h2>
+        </div>
         <div className="task-maker-container">
           <TaskMaker
             attTasks={ attTasks }
