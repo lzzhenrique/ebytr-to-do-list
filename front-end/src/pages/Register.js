@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../api/http';
+import './style/register.css';
 
 const CONFLICT = 409;
 const PASSWORD_MIN_LENGTH = 8;
@@ -37,30 +38,28 @@ function Register() {
   }
 
   return (
-    <div>
-      <h1>Cadastre-se na Ebytr!</h1>
-      <div>
-        <h3>Para se registrar, basta:</h3>
+    <div className="register-container">
+      <div className="title-container">
+        <h1 className="title-register">Cadastre-se na Ebytr!</h1>
+      </div>
+      <div className="infos-register">
         <ul>
+          <h3>Para se registrar, siga os passos a seguir!</h3>
           <li>Escolher um nome com pelo menos 3 letras</li>
           <li>Sua senha deve ter pelo menos 8 letras</li>
           <li>Escolher o seu melhor email</li>
         </ul>
       </div>
-      <button
-        type="button"
-        onClick={ () => navigate('/login') }
-      >
-        Voltar
-      </button>
-      <div className="login-div">
+      <div className="register-div">
         <input
+          className="register-input"
           name="name"
           type="text"
           placeholder="Nome"
           onChange={ (e) => handleChange(e.target) }
         />
         <input
+          className="register-input"
           name="email"
           type="text"
           placeholder="email"
@@ -70,8 +69,9 @@ function Register() {
           emailAlreadExists ? <span>Esse e-mail já existe!</span> : ''
         }
         <input
+          className="register-input"
           name="password"
-          type="text"
+          type="password"
           placeholder="password"
           onChange={ (e) => handleChange(e.target) }
         />

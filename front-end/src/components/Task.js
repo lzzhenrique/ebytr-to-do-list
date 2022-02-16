@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import EditTask from './EditTask';
 import http from '../api/http';
+import './style/task.css';
 
 function Task(
   { task: { createdAt, deadline, description, status, title, _id: id }, attTasks },
@@ -20,7 +21,6 @@ function Task(
 
   const deleteTask = async () => {
     await http.deleteTask({ token, id });
-    console.log(attTasks);
     attTasks();
   };
 
@@ -29,24 +29,28 @@ function Task(
       id={ id }
       className="task-card"
     >
+      <div
+        className="task-info"
+      />
       <h2>{title}</h2>
       <p>{description}</p>
-      <p>{createdAt}</p>
-      <p>{deadline}</p>
-      <p>{status}</p>
-      <div className="task-buttons" />
-      <button
-        type="button"
-        onClick={ () => deleteTask() }
-      >
-        Remove Task
-      </button>
-      <button
-        type="button"
-        onClick={ () => setEditMode(true) }
-      >
-        Edit Task
-      </button>
+      <p>{`Created at: ${createdAt}`}</p>
+      <p>{`Due date: ${deadline}`}</p>
+      <p>{`Status: ${status}`}</p>
+      <div className="task-buttons">
+        <button
+          type="button"
+          onClick={ () => deleteTask() }
+        >
+          Remove Task
+        </button>
+        <button
+          type="button"
+          onClick={ () => setEditMode(!editMode) }
+        >
+          Edit task
+        </button>
+      </div>
       {
         editMode ? (
           <EditTask

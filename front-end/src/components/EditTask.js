@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import http from '../api/http';
+import './style/editTask.css';
 
 function EditTask({ task, attTasks, setEditMode }) {
   const token = localStorage.getItem('token');
@@ -25,6 +26,7 @@ function EditTask({ task, attTasks, setEditMode }) {
         key={ index }
       >
         <input
+          className="edit-task-input"
           name={ title }
           value={ taskToEdit[title] }
           onChange={ (e) => setTaskToEdit({ ...taskToEdit, [title]: e.target.value }) }
@@ -59,6 +61,7 @@ function EditTask({ task, attTasks, setEditMode }) {
     <form>
       { renderInputs() }
       <select
+        className="edit-task-input"
         name="status"
         onChange={ (e) => setTaskToEdit({ ...taskToEdit, status: e.target.value }) }
       >
@@ -69,7 +72,7 @@ function EditTask({ task, attTasks, setEditMode }) {
         disabled={ disabledButton }
         onClick={ () => editTask() }
       >
-        Edit your task!
+        Confirm edit!
       </button>
     </form>
   );

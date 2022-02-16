@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../api/http';
+import './style/login.css';
 
 const PASSWORD_MIN_LENGTH = 8;
 
@@ -32,35 +33,41 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="login-container">
       <h1>Ebytr, sua todo list!</h1>
       <div className="login-div">
         <input
+          className="login-input"
           name="email"
           type="text"
-          placeholder="email"
+          placeholder="Email"
           onChange={ (e) => handleChange(e.target) }
         />
         <input
+          className="login-input"
           name="password"
-          type="text"
-          placeholder="password"
+          type="password"
+          placeholder="Password"
           onChange={ (e) => handleChange(e.target) }
         />
       </div>
-      <button
-        type="button"
-        onClick={ () => navigate('/register') }
-      >
-        Registrar-se
-      </button>
-      <button
-        disabled={ disabledButton }
-        onClick={ () => makeLogin() }
-        type="button"
-      >
-        Entrar
-      </button>
+      <div className="login-buttons">
+        <button
+          className="login-button"
+          type="button"
+          onClick={ () => navigate('/register') }
+        >
+          Registrar-se
+        </button>
+        <button
+          className="login-button"
+          disabled={ disabledButton }
+          onClick={ () => makeLogin() }
+          type="button"
+        >
+          Entrar
+        </button>
+      </div>
     </div>
   );
 }
