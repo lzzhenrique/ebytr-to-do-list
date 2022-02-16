@@ -36,9 +36,10 @@ function Home() {
         </div>
         <div className="tasks-container">
           {
-            userTasks.map((taskInfo, index) => (
+            userTasks.map((task, index) => (
               <Task
-                taskInfo={ taskInfo }
+                attTasks={ attTasks }
+                task={ task }
                 key={ index }
                 a={ index }
               />

@@ -62,7 +62,7 @@ const http = {
       return error.response.status;
     }
   },
-  deleteTask: async ({ id }) => {
+  deleteTask: async ({ id, token }) => {
     try {
       const response = await api.delete(`task/${id}`, {
         headers: { authorization: token },
