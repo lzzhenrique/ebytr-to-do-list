@@ -17,7 +17,7 @@ module.exports = joi.object({
       'string.required': 'password is a required',
     }),
   name: joi.string()
-    .min(5)
+    .min(3)
     .required()
     .messages({
       'any.empty': 'name is required',
