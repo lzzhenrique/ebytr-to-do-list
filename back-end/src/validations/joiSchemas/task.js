@@ -2,8 +2,6 @@ const joi = require('joi').extend(require('@joi/date'));
 
 module.exports = joi.object({
   title: joi.string()
-  .min(3)
-  .max(50)
   .required()
   .messages({
     'string.min': 'Title needs to be at least 5 caracters',
@@ -12,13 +10,11 @@ module.exports = joi.object({
     'string.required': 'Title needs to be a string',
   }),
   description: joi.string()
-  .min(15)
-  .max(256)
+  .max(1000)
   .required()
   .messages({
     'any.empty': 'Description is required!',
-    'string.min': 'Description needs to be at least 15 caracters',
-    'string.max': 'Description needs to be at max 256 caracters',
+    'string.max': 'Description needs to be at max 1000 caracters',
     'string.required': 'Description needs to be a string',
   }),
   createdAt: joi.date()
