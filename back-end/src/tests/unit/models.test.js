@@ -8,6 +8,7 @@ const mongoConnection = require('../../models/connection');
 
 const find = require('../../models/find');
 const remove = require('../../models/remove');
+const create = require('../../models/create');
 
 describe('Testa comportamento da camada de models', async () => {
   let connectionMock;
@@ -107,6 +108,20 @@ describe('Testa comportamento da camada de models', async () => {
         const deletedConfirmation = { acknowledged: true, deletedCount: 1 };
         const response = await remove(TASKS_COLLECTION, TASK_0_ID);
         expect(response).to.be.deep.equal(deletedConfirmation);
+      });
+    });
+  });
+
+  describe('Testa o comportamento do arquivo models.create', () => {
+    describe('Quando a task é inserida com sucesso', () => {
+      afterEach(async () => {
+        await connectionMock.collection(TASKS_COLLECTION).drop();
+      });
+
+      it('Retorna um obj igual ao obj da posição 0 da const expectedProducts[0]', async () => {
+        const response = await create(TASKS_COLLECTION, expectedTasks[0]);
+  
+        expect(response).to.be.deep.equal(expectedTasks[0]);
       });
     });
   });
