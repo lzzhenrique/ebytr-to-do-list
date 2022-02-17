@@ -11,9 +11,21 @@ const remove = require('../../models/remove');
 const create = require('../../models/create');
 const update = require('../../models/update');
 
-describe('Testa comportamento da camada de models', async () => {
-  let connectionMock;
+let connectionMock;
+const startDBMock = async () => {
+  const DBServer = await MongoMemoryServer.create();
+  const URIMock = DBServer.getUri();
+  connectionMock = await MongoClient
+    .connect(URIMock, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then((conn) => conn.db('Ebytr'));
 
+  sinon.stub(mongoConnection, 'connect').resolves(connectionMock);
+};
+
+describe('Testa comportamento da camada de models para tasks', async () => {
   const TASKS_COLLECTION = 'tasks';
   const USER_ID = '619cf05c1b42550e2b16h2cf';
   const TASK_0_ID = ObjectId('619cf05c1b42550e2b16e9cf');
@@ -48,18 +60,7 @@ describe('Testa comportamento da camada de models', async () => {
     },
   ];
 
-  before(async () => {
-    const DBServer = await MongoMemoryServer.create();
-    const URIMock = DBServer.getUri();
-    connectionMock = await MongoClient
-      .connect(URIMock, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then((conn) => conn.db('Ebytr'));
-
-    sinon.stub(mongoConnection, 'connect').resolves(connectionMock);
-  });
+  before(() => startDBMock());
 
   after(() => {
     mongoConnection.connect.restore();
@@ -159,6 +160,69 @@ describe('Testa comportamento da camada de models', async () => {
         const response = await update(TASKS_COLLECTION, taskToUpdate);
   
         expect(response).to.be.deep.equal(attResponse);
+      });
+    });
+  });
+});
+
+describe('Testa comportamento da camada de models para usuario', async () => {
+  const USERS_COLLECTION = 'users';
+  const USER_EMAIL = 'luisizin06@gotmal.com';
+
+  const expectedUsers = [ 
+    {
+      _id: ObjectId('619cf05c1b42550e2b16e9cf'),
+      name: 'Luiz Henrique',
+      email: 'luisizin06@gotmal.com',
+      password: '87654231',
+    },
+    {
+      _id: ObjectId('619cf05c7442550e2b16e9cf'),
+      name: 'Ir ao mercado',
+      email: 'luiswadwan06@ootmal.com',
+      password: '2020-02-16',
+    }, 
+    {
+      _id: ObjectId('619cf05c1b42590e2b16e9cf'),
+      name: 'Maria Carol',
+      email: 'marycarol@gotmail.com',
+      password: 'carmaria',
+    },
+  ];
+
+  before(async () => startDBMock());
+
+  after(() => {
+    mongoConnection.connect.restore();
+  });
+
+  describe('Testa o comportamento do arquivo models.getUserByEmail', () => {
+    describe('Quando o usuario pedido existe', () => {
+      before(async () => {
+        await connectionMock.collection(USERS_COLLECTION).insertMany(expectedUsers);
+      });
+  
+      after(async () => {
+        await connectionMock.collection(USERS_COLLECTION).drop();
+      });
+  
+      it('Retorna o usuario da posicao 0 da const expectedUsers', async () => {
+        const response = await find(USERS_COLLECTION, { email: USER_EMAIL });
+        expect(response).to.be.deep.equal(expectedUsers);
+      });
+    });
+  });
+
+  describe('Testa o comportamento do arquivo models.create para usuarios', () => {
+    describe('Quando o usuario é inserido com sucesso', () => {
+      afterEach(async () => {
+        await connectionMock.collection(USERS_COLLECTION).drop();
+      });
+
+      it('Retorna um obj igual ao obj da posição 0 da const expectedUsers[0]', async () => {
+        const response = await create(USERS_COLLECTION, expectedUsers[0]);
+  
+        expect(response).to.be.deep.equal(expectedUsers[0]);
       });
     });
   });
