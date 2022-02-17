@@ -19,6 +19,42 @@ function Home() {
     getAllTasks();
   }, []);
 
+  const orderByDate = () => {
+    const order = userTasks.sort((a, b) => {
+      const taskADate = new Date(a.createdAt);
+      const taskBDate = new Date(b.createdAt);
+
+      return taskADate - taskBDate;
+    });
+    setUserTasks([...order]);
+  };
+
+  const orderByAlpha = () => {
+    const orderAlpha = userTasks.sort((a, b) => {
+      const taskATitle = a.title.toLowerCase();
+      const taskBTitle = b.title.toLowerCase();
+      const LESS = -1;
+
+      if (taskATitle < taskBTitle) return LESS;
+      if (taskATitle > taskBTitle) return 1;
+      return 0;
+    });
+    setUserTasks([...orderAlpha]);
+  };
+
+  const orderByStatus = () => {
+    const order = userTasks.sort((a, b) => {
+      const taskAStatus = a.status.toLowerCase();
+      const taskBStatus = b.status.toLowerCase();
+      const LESS = -1;
+
+      if (taskAStatus < taskBStatus) return LESS;
+      if (taskAStatus > taskBStatus) return 1;
+      return 0;
+    });
+    setUserTasks([...order]);
+  };
+
   const attTasks = async () => {
     const result = await http.getAllTasks(token);
     setUserTasks(result);
@@ -39,6 +75,30 @@ function Home() {
           <TaskMaker
             attTasks={ attTasks }
           />
+          <div className="subtitle">
+            <h3>Order your tasks by: </h3>
+          </div>
+        </div>
+        <div className="sort-buttons-container">
+          <button
+            type="button"
+            onClick={ () => orderByDate() }
+          >
+            Creation
+          </button>
+          <button
+            type="button"
+            onClick={ () => orderByAlpha() }
+          >
+            Alphabetically
+          </button>
+          <button
+            type="button"
+            onClick={ () => orderByStatus() }
+          >
+            Status
+          </button>
+
         </div>
         <div className="tasks-container">
           {
@@ -47,7 +107,6 @@ function Home() {
                 attTasks={ attTasks }
                 task={ task }
                 key={ index }
-                a={ index }
               />
             ))
           }
