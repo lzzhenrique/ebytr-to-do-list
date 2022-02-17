@@ -1,70 +1,76 @@
+# 🎯 O desafio 
 
-# Considerações sobre o desafio
-
-O prazo para a entrega da solução vai do recebimento do desafio até o dia 17/02 12h00.
-
-
-## Sobre a entrega:
-
-O código deve ser mantido na sua conta pessoal do GitHub, portanto crie um novo repositório público com o nome a sua escolha;
-Mantenha a última versão do código na branch principal **(main)**;
+Construir um serviço de tasks para as pessoas colaboradoras da empresa Ebytr.
+Para atingir o desafio proposto, as principais ferramentas utilizadas foram: Node.js, React e Mongodb
 
 ___
+## ⚙️ Setup inicial:
 
-## Contexto do Desafio:
-A empresa Ebytr está passando por problemas de produtividade/controle porque as pessoas colaboradoras vêm tendo dificuldade na organização de suas tarefas individuais. 
+Além das ferramentas citadas acima, esse projeto também utiliza outras bibliotecas, para atingir seu potencial pleno. Siga o passo a passo abaixo para instalá-las:
 
-Por esse motivo, a diretora de produto Carolina Bigonha decidiu implantar uma nova forma de organizar as tarefas.
-Você foi a pessoa contratada para desenvolver um sistema capaz de auxiliar as pessoas colaboradoras a se organizar e ter mais produtividade.
+Primeiro, em seu terminal, clone o projeto:
+```
+git clone git@github.com:lzzhenrique/ebytr-to-do-list.git
+```
+Após isso, para instalar as dependencias de back-end cole o comando a seguir:
+```
+cd ebytr-to-do-list/back-end
+npm i
+```
+Agora, volte para a pasta raiz com:
+```
+cd ..
+```
+E para instalar as dependencias de front-end cole o comando a seguir:
+```
+cd front-end
+npm i
+```
 
+Em seguida, certifique-se que seu mongoDB está ativado e funcionando, para isso, use o comandos a seguir: 
+```
+sudo service mongod start
+```
 
-Na Ebytr o time de desenvolvimento utiliza a Stack MERN para criar suas aplicações. Foi combinado com a Ebytr que você utilizará essa mesma Stack para resolver o problema de organização e produtividade da empresa.
+Aguarde as instalações, e pronto! Setup montado 😀
 
 ___
+## 🖥️ Usando a aplicação
 
-Abaixo estão 
+Agora que você tem o projeto e as suas dependencias instalados, para rodar ele, volte para a pasta raiz do projeto e siga os seguintes comandos:
 
-  - (**I**) Requisitos técnicos,
-  - (**II**) Funcionalidades,
-  - (**III**) Critérios de avaliação do desafio
-  - (**IV**) Dicas importantes.
+```
+cd back-end
+node src/api/server.js
+```
+Após isso, abra um segundo terminal no seu computador, esse terminal será o responsavel por rodar o nosso front-end. Dá pasta raiz desse segundo terminal, execute o seguinte comando
+```
+cd front-end
+npm start
+```
 
+Executando esses comandos, o nosso front-end irá começar a funcionar na [porta 3000](http://localhost:3000) do seu computador, automaticamente uma janela do seu navegador será aberta, te levando para a pagina de login da aplicação.
 
+___
+## 📘 Como a aplicação funciona?
 
-### **I** - Requisitos técnicos:
- - Front-End em React;
- - Back-End em NodeJS, com MongoDB;
- - Arquitetura em camadas;
+O funcionamento da todo-list-ebytr é simples e direto ao ponto, primeiro você precisa criar um usuario, acessando o botão de **REGISTER** na tela de login, e após ter um usuario cadastrado e autorizado, você pode fazer Login na nossa aplicação e começar a salvar, editar e excluir tarefas.
 
+A aplicação também te dá a opção de organizar suas tarefas por: ordem alfabetica, data de criação e status.
 
-### **II** - Funcionalidades:
- - Visualizar a lista de tarefas;
- - Esta lista deve ser ordenável por ordem alfabética, data de criação ou por status;
- - Inserir uma nova tarefa na lista;
- - Remover uma tarefa da lista;
- - Atualizar uma tarefa da lista;
- - A tarefa deve possuir um status editável: pendente, em andamento ou pronto;
+___
+## 🧪 Testes:
 
+Atualmente, a aplicação conta com testagem na camada de modelos de back-end, para executar os testes, basta seguir o seguinte comando.
+```
+cd back-end
+npm run test
+```
 
-### **III** - Critérios de avaliação:
- - Nosso time irá avaliar a sua entrega olhando, principalmente, para os itens abaixo:
- - Atendimento aos requisitos técnicos e funcionais;
- - Seu projeto deve rodar sem erros;
- - Entendimento dos conceitos das camadas adotadas;
- - Código e componentes reutilizados;
- - Habilidade em escrever testes (mínimo 30% de cobertura);
- - Boa legibilidade do código;
- - Separação do front e backend;
- - Mensagens de commits bem descritas e commits com um escopo nítido;
- - Referências de códigos de terceiros;
- - Instruções nítidas no README do projeto para setup e execução da aplicação e dos testes.
+## 👣 Próximos passos:
 
-
-### **IV** - Dicas importantes!
- - Ter uma boa cobertura de testes Front e Back;
- - Aplicar boas práticas de escrita de código;
- - Documentação do projeto (README), que inclua:
- - Passo a passo para instalar e executar o projeto. Incluindo instruções especiais para instalar dependências e/ou bancos de dados, se houver;
- - Endereço da aplicação no Heroku, se houver (ou outro serviço de deployment);
- - Ter um linter configurado;
- - O projeto deverá ser entregue via repositório pessoal no GitHub (utilize boas práticas de criação/nomeação de branches, além de mensagens de commits bem descritas e commits com um escopo nítido).
+Os próximos passos da aplicação envolvem:
+- Concluir testes unitarios de back-end
+- Concluir testes unitarios de front-end
+- Refinar a estilização da aplicação, adicionando fontes e mais detalhes aos componentes
+- Design responsivo 
