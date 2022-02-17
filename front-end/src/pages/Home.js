@@ -75,9 +75,11 @@ function Home() {
           <TaskMaker
             attTasks={ attTasks }
           />
+          <div className="subtitle">
+            <h3>Order your tasks by: </h3>
+          </div>
         </div>
         <div className="sort-buttons-container">
-          <h3>Order your tasks!</h3>
           <button
             type="button"
             onClick={ () => orderByDate() }
