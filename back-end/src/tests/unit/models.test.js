@@ -9,6 +9,7 @@ const mongoConnection = require('../../models/connection');
 const find = require('../../models/find');
 const remove = require('../../models/remove');
 const create = require('../../models/create');
+const update = require('../../models/update');
 
 describe('Testa comportamento da camada de models', async () => {
   let connectionMock;
@@ -122,6 +123,42 @@ describe('Testa comportamento da camada de models', async () => {
         const response = await create(TASKS_COLLECTION, expectedTasks[0]);
   
         expect(response).to.be.deep.equal(expectedTasks[0]);
+      });
+    });
+  });
+
+  describe('Testa o comportamento do arquivo models.update', () => {
+    describe('Quando o produto é atualizado com sucesso', () => {
+      const taskToUpdate = {
+        postId: ObjectId('619cf05c1b42550e2b16e9cf'),
+        title: 'Ir ao aeroporto',
+        description: 'Comprar dois kilo de feijao',
+        createdAt: '2020-30-14',
+        deadline: '2020-02-19',
+        status: 'Ready',
+        userId: '619cf05c1b42550e2b16h2cf',
+      };
+
+      const attResponse = {
+        acknowledged: true,
+        modifiedCount: 1,
+        upsertedId: null,
+        upsertedCount: 0,
+        matchedCount: 1,
+      };
+
+      beforeEach(async () => {
+        await connectionMock.collection(TASKS_COLLECTION).insertMany(expectedTasks);
+      });
+
+      afterEach(async () => {
+        await connectionMock.collection(TASKS_COLLECTION).drop();
+      });
+
+      it('Retorna um obj de resposta comprovando que ocorreu a alteracao solicitada', async () => {
+        const response = await update(TASKS_COLLECTION, taskToUpdate);
+  
+        expect(response).to.be.deep.equal(attResponse);
       });
     });
   });
