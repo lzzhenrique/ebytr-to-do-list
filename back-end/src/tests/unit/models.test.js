@@ -5,13 +5,16 @@ const { after, before, describe } = require('mocha');
 const { MongoClient, ObjectId } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoConnection = require('../../models/connection');
+
 const find = require('../../models/find');
+const remove = require('../../models/remove');
 
 describe('Testa comportamento da camada de models', async () => {
   let connectionMock;
 
   const TASKS_COLLECTION = 'tasks';
   const USER_ID = '619cf05c1b42550e2b16h2cf';
+  const TASK_0_ID = ObjectId('619cf05c1b42550e2b16e9cf');
 
   const expectedTasks = [ 
     {
@@ -86,6 +89,24 @@ describe('Testa comportamento da camada de models', async () => {
       it('Retorna um array vazio', async () => {
         const response = await find(TASKS_COLLECTION, { userId: USER_ID });
         expect(response).to.have.length(0);
+      });
+    });
+  });
+
+  describe('Testa o comportamento do arquivo models.remove', () => {
+    describe('Quando existem tasks na colecao', () => {
+      before(async () => {
+        await connectionMock.collection(TASKS_COLLECTION).insertMany(expectedTasks);
+      });
+  
+      after(async () => {
+        await connectionMock.collection(TASKS_COLLECTION).drop();
+      });
+  
+      it('Exclui o item escolhido', async () => {
+        const deletedConfirmation = { acknowledged: true, deletedCount: 1 };
+        const response = await remove(TASKS_COLLECTION, TASK_0_ID);
+        expect(response).to.be.deep.equal(deletedConfirmation);
       });
     });
   });
