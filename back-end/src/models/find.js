@@ -11,5 +11,6 @@ module.exports = async (collection, { userId, postId }) => {
 
   const findTaskByPostId = (
     await connection.connect()).collection(collection).findOne({ _id: ObjectId(postId) });
-  return findTaskByPostId;
+    
+    return findTaskByPostId;
 };

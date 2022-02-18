@@ -10,8 +10,6 @@ module.exports = async (task) => {
   
   if (userAuthorized.userId !== userId) return { error: userNotAuthorized };
 
-  console.log('Passei do que tu imaginou');
-
   if (error) {
     error.details[0].status = 400;
     return { error };
