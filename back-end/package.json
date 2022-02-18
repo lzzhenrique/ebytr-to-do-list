@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha src/tests/**/*$NAME*.test.js --exit",
+    "test:mocha": "nyc --all --include src/models --include src/services --include src/middlewares --include src/validations/joiSchemas --include src/controllers mocha src/tests/unit/*.js --exit",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
@@ -23,6 +24,7 @@
     "moment": "^2.29.1",
     "mongodb": "^4.3.1",
     "mongodb-memory-server": "^8.3.0",
+    "nyc": "^15.1.0",
     "sinon": "^13.0.1"
   },
   "devDependencies": {
