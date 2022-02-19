@@ -34,7 +34,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1>Ebytr, sua todo list!</h1>
+      <h1>Ebytr</h1>
       <div className="login-div">
         <input
           className="login-input"
@@ -57,7 +57,7 @@ function Login() {
           type="button"
           onClick={ () => navigate('/register') }
         >
-          Registrar-se
+          Sign up
         </button>
         <button
           className="login-button"
@@ -65,7 +65,7 @@ function Login() {
           onClick={ () => makeLogin() }
           type="button"
         >
-          Entrar
+          Login
         </button>
       </div>
     </div>

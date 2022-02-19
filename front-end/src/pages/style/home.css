@@ -1,15 +1,3 @@
-h1, h2, p, li, h3 {
-  color: #C7EDE4;
-}
-
-button {
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  padding: 1rem;
-  margin: 5px;
-}
-
 .name-container {
   display: flex;
   justify-content: center;

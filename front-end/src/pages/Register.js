@@ -40,15 +40,7 @@ function Register() {
   return (
     <div className="register-container">
       <div className="title-container">
-        <h1 className="title-register">Cadastre-se na Ebytr!</h1>
-      </div>
-      <div className="infos-register">
-        <ul>
-          <h3>Para se registrar, siga os passos a seguir!</h3>
-          <li>Escolher um nome com pelo menos 3 letras</li>
-          <li>Sua senha deve ter pelo menos 8 letras</li>
-          <li>Escolher o seu melhor email</li>
-        </ul>
+        <h1 className="title-register">Sign up!</h1>
       </div>
       <div className="register-div">
         <input
