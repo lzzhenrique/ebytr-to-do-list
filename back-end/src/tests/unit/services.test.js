@@ -7,22 +7,10 @@ const { emptyFields } = require('../utils/errRequests');
 
 // MODELS
 const model = require('../../models')('tasks');
-const dropCollection = require('../../models/dropCollection');
 
 // SERVICES
-const loginServices = require('../../services/login');
 const tasksServices = require('../../services/tasks');
-const usersServices = require('../../services/users');
 
-const TASK_UPDATED = {
-  title: 'Ir ao circo',
-  description: 'Comprar feijao e amendoin',
-  createdAt: '2020-02-16',
-  deadline: '2023-05-19',
-  status: 'Pending',
-  userId: '619cf05c1b42550e2b16h2cf',
-  postId: '619cf05c1b49950e2b16e1cf',
-};
 const DELETED_CONFIRMATION = { acknowledged: true, deletedCount: 0 };
 const EXPECTED_TASK = {
   title: 'Ir ao mercadso',
