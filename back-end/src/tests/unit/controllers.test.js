@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable max-lines-per-function */
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
@@ -9,6 +10,8 @@ chai.use(sinonChai);
 const { expect } = chai;
 const { ObjectId } = require('mongodb');
 const { after, before, describe } = require('mocha');
+
+const ID = ObjectId('6210e400d4cd634698aa47e3'); 
 
 // SERVICES
 const TasksService = require('../../services/tasks');
@@ -35,88 +38,143 @@ const EXPECTED_TASK = {
 };
 
 describe('Testa a camada de controller para Tasks', () => {
-  describe('Quando a req enviada é válida', () => {
-    const response = {};
-    const request = {};
-
-    before(() => {
-      request.body = { ...TASK };
-      request.user = { _id: '619cf05c1b42550e2b16h2cf' };
-
-      response.status = sinon.stub()
-        .returns(response);
-      response.json = sinon.stub()
-        .returns({ task: EXPECTED_TASK });
-
-      sinon.stub(TasksService, 'create')
-        .resolves(true);
+  describe('Testa controllers.create', () => {
+    describe('Quando a req enviada é válida', () => {
+      const response = {};
+      const request = {};
+  
+      before(() => {
+        request.body = { ...TASK };
+        request.user = { _id: '619cf05c1b42550e2b16h2cf' };
+  
+        response.status = sinon.stub()
+          .returns(response);
+        response.json = sinon.stub()
+          .returns({ task: EXPECTED_TASK });
+  
+        sinon.stub(TasksService, 'create')
+          .resolves(true);
+      });
+  
+      after(() => {
+        TasksService.create.restore();
+      });
+  
+      it('é chamado o status com o código 201', async () => {
+        await TasksControllers.create(request, response);
+  
+        expect(response.status.calledWith(201)).to.be.equal(true);
+      });
+  
+      it('é chamado o json com a mensagem "Filme criado com sucesso!"', async () => {
+        await TasksControllers.create(request, response);
+        const responseJSON = response.json();
+  
+        expect(responseJSON).to.be.deep.equal({ task: EXPECTED_TASK });
+      });
     });
-
-    after(() => {
-      TasksService.create.restore();
+    describe('Quando a req enviada nao tem os campos corretos', () => {
+      const response = {};
+      const request = {};
+      let countNextCalls = 0;
+      const next = (e) => {
+        if (e.message) countNextCalls += 1;
+      }; 
+  
+      before(() => {
+        request.body = {};
+        request.user = { _id: '619cf05c1b42550e2b16h2cf' };
+  
+        response.status = sinon.stub()
+          .returns(response);
+        response.json = sinon.stub()
+          .returns();
+  
+        sinon.stub(TasksService, 'create')
+          .resolves({ error: 'BLALBALBLAL' });
+      });
+  
+      after(() => {
+        TasksService.create.restore();
+      });
+  
+      it('Chama a função next', async () => {
+        await TasksControllers.create(request, response, next);
+        expect(countNextCalls).to.be.greaterThan(0);
+      });
     });
-
-    it('é chamado o status com o código 201', async () => {
-      await TasksControllers.create(request, response);
-
-      expect(response.status.calledWith(201)).to.be.equal(true);
-    });
-
-    it('é chamado o json com a mensagem "Filme criado com sucesso!"', async () => {
-      await TasksControllers.create(request, response);
-      const responseJSON = response.json();
-
-      expect(responseJSON).to.be.deep.equal({ task: EXPECTED_TASK });
+    describe('Quando a req enviada não tem body ou user', () => {
+      const response = {};
+      const request = {};
+      let countNextCalls = 0;
+      const next = (e) => {
+        if (e.message) countNextCalls += 1;
+      }; 
+  
+      before(() => {
+        response.status = sinon.stub()
+          .returns(response);
+        response.json = sinon.stub()
+          .returns();
+      });
+  
+      it('Chama a função next', async () => {
+        await TasksControllers.create(request, response, next);
+        expect(countNextCalls).to.be.greaterThan(0);
+      });
     });
   });
-  describe('Quando a req enviada nao tem os campos corretos', () => {
-    const response = {};
-    const request = {};
-    let countNextCalls = 0;
-    const next = (e) => {
-      if (e.message) countNextCalls += 1;
-    }; 
-
-    before(() => {
-      request.body = {};
-      request.user = { _id: '619cf05c1b42550e2b16h2cf' };
-
-      response.status = sinon.stub()
-        .returns(response);
-      response.json = sinon.stub()
-        .returns();
-
-      sinon.stub(TasksService, 'create')
-        .resolves({ error: 'BLALBALBLAL' });
+  describe('Testa controllers.remove', () => {
+    describe('Quando a req enviada é válida', () => {
+      const response = {};
+      const request = {};
+  
+      before(async () => {
+        request.params = { id: ID };
+  
+        response.status = sinon.stub()
+          .returns(response);
+        response.end = sinon.stub()
+          .returns();
+        response.json = sinon.stub()
+          .returns();
+  
+        sinon.stub(TasksService, 'remove')
+          .resolves(true);
+      });
+  
+      it('é chamado o status com o código 204', async () => {
+        await TasksControllers.remove(request, response);
+  
+        expect(response.status.calledWith(204)).to.be.equal(true);
+      });
     });
-
-    after(() => {
-      TasksService.create.restore();
-    });
-
-    it('Chama a função next', async () => {
-      await TasksControllers.create(request, response, next);
-      expect(countNextCalls).to.be.greaterThan(0);
-    });
-  });
-  describe('Quando a req enviada não tem body ou user', () => {
-    const response = {};
-    const request = {};
-    let countNextCalls = 0;
-    const next = (e) => {
-      if (e.message) countNextCalls += 1;
-    }; 
-
-    before(() => {
-      response.status = sinon.stub()
-        .returns(response);
-      response.json = sinon.stub()
-        .returns();
-    });
-
-    it('Chama a função next', async () => {
-      await TasksControllers.create(request, response, next);
-      expect(countNextCalls).to.be.greaterThan(0);
+    describe('Quando a req enviada nao tem os campos corretos', () => {
+      const response = {};
+      const request = {};
+      let countNextCalls = 0;
+      const next = (e) => {
+        if (e.message) countNextCalls += 1;
+      }; 
+  
+      before(() => {
+        response.status = sinon.stub()
+          .returns(response);
+        response.json = sinon.stub()
+          .returns();
+  
+        sinon.stub(TasksService, 'create')
+          .resolves({ error: 'BLALBALBLAL' });
+      });
+  
+      after(() => {
+        TasksService.create.restore();
+      });
+  
+      it('Chama a função next', async () => {
+        await TasksControllers.remove(request, response, next);
+        expect(countNextCalls).to.be.greaterThan(0);
+      });
     });
   });
 });
