@@ -34,8 +34,8 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1>Ebytr</h1>
-      <div className="login-div">
+      <h1 className="title">Ebytr</h1>
+      <form className="login-div">
         <input
           className="login-input"
           name="email"
@@ -50,7 +50,7 @@ function Login() {
           placeholder="Password"
           onChange={ (e) => handleChange(e.target) }
         />
-      </div>
+      </form>
       <div className="login-buttons">
         <button
           className="login-button"

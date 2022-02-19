@@ -1,17 +1,15 @@
 ::placeholder {
-  font-size: medium;
+  font-size: x-large;
 }
 
 .login-container {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
   border: 5px #C7EDE4 outset;
   border-radius: 10px;
-  width: 40%;
-  height: 40%;
-  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  padding: 6rem 5rem;
 }
 
 .login-div {
@@ -22,27 +20,35 @@
 
 .login-input {
   padding: 1rem;
-  width: 15rem;
+  width: 25rem;
   height: 2rem;
   margin: 1rem;
-  border: 1px #809993 solid;
+  border: none;
   border-radius: 10px;
-  text-align: center;
-  font-size: large;
+  font-weight: lighter;
+  font-size: x-large;
+}
+
+.login-button {
+  font-size: x-large;
+  font-weight: bold;
+  color: #202C39;
+  margin: 1rem 2rem;
+  width: 8rem;
 }
 
 .login-button:hover {
   transform: scale(1.1);
   transition: .3s ease;
 }
-.login-button {
-  font-display: inherit;
-  margin: 1rem;
-  padding: 1rem;
-  margin-right: 2rem;
-  margin-left: 2rem;
-  width: 6rem;
-  font-smooth: always !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
+
+.login-button:disabled {
+  transform: scale(1.0);
+  cursor: auto;
+}
+
+.title {
+  font-weight: lighter;
+  font-size: 50px;
+  margin-bottom: 1rem;
 }
