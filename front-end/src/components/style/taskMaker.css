@@ -2,19 +2,34 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 25%;
 }
 
 .task-inputs {
+  align-items: center;
   display: flex;
-  text-align: center;
+  flex-direction: column;
 }
 
-.task-input {
-  border: none;
-  border-radius: 20px;
+.task-description {
+  padding: 1rem;
+  width: 25rem;
+  height: 8rem;
   margin: 1rem;
-  padding: 2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: lighter;
+  font-size: x-large;
+}
+.task-input {
+  padding: 1rem;
+  width: 25rem;
+  height: 2rem;
+  margin: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: lighter;
+  font-size: x-large;
 }
 
 .input-title {

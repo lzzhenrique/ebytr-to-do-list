@@ -16,6 +16,10 @@ input:focus-visible {
   outline: -webkit-focus-ring-color auto 0px;
 }
 
+textarea:focus-visible {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+
 button {
   cursor: pointer;
   border-radius: 10px;

@@ -27,25 +27,30 @@ function TaskMaker({ attTasks }) {
   };
 
   const renderInputs = () => {
-    const inputTitles = ['title', 'description', 'deadline'];
+    const inputTitles = ['title', 'deadline', 'description'];
 
-    return inputTitles.map((title, index) => (
-      <label
-        htmlFor={ title }
-        key={ index }
-      >
-        <p className="input-title">
-          { title === 'deadline' ? 'Due date' : title}
-        </p>
+    return inputTitles.map((title, index) => {
+      if (title === 'description') {
+        return (
+          <textarea
+            className="task-description"
+            name={ title }
+            onChange={ (e) => newTaskHandler(e.target) }
+            placeholder={ `${title} of your task` }
+          />
+        );
+      }
+      return (
         <input
+          key={ index }
           className="task-input"
           name={ title }
           onChange={ (e) => newTaskHandler(e.target) }
           type={ title === 'deadline' ? 'date' : 'text' }
           placeholder={ `${title} of your task` }
         />
-      </label>
-    ));
+      );
+    });
   };
 
   const renderOptions = () => {
