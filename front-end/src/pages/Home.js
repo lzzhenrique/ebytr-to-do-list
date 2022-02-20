@@ -59,15 +59,17 @@ function Home() {
           Status
         </button>
       </div>
-      <a className="call-modal" href="#modal">
-        <button
-          type="button"
-          className="call-modal-button"
-          aria-label="Back to home button"
-        >
-          Create Task!
-        </button>
-      </a>
+      <div className="call-modal-container">
+        <a className="call-modal" href="#modal">
+          <button
+            type="button"
+            className="call-modal-button"
+            aria-label="Back to home button"
+          >
+            Create Task!
+          </button>
+        </a>
+      </div>
       <div
         className="modal-container"
         id="modal"
