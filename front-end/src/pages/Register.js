@@ -39,30 +39,20 @@ function Register() {
 
   return (
     <div className="register-container">
-      <div className="title-container">
-        <h1 className="title-register">Cadastre-se na Ebytr!</h1>
-      </div>
-      <div className="infos-register">
-        <ul>
-          <h3>Para se registrar, siga os passos a seguir!</h3>
-          <li>Escolher um nome com pelo menos 3 letras</li>
-          <li>Sua senha deve ter pelo menos 8 letras</li>
-          <li>Escolher o seu melhor email</li>
-        </ul>
-      </div>
-      <div className="register-div">
+      <h1 className="title-register">Sign up</h1>
+      <form className="register-div">
         <input
           className="register-input"
           name="name"
           type="text"
-          placeholder="Nome"
+          placeholder="Choose a username"
           onChange={ (e) => handleChange(e.target) }
         />
         <input
           className="register-input"
           name="email"
           type="text"
-          placeholder="email"
+          placeholder="Email"
           onChange={ (e) => handleChange(e.target) }
         />
         {
@@ -72,17 +62,27 @@ function Register() {
           className="register-input"
           name="password"
           type="password"
-          placeholder="password"
+          placeholder="Password"
           onChange={ (e) => handleChange(e.target) }
         />
+      </form>
+      <div className="title-container">
+        <button
+          className="register-button"
+          onClick={ () => navigate('/login') }
+          type="button"
+        >
+          Back
+        </button>
+        <button
+          className="register-button"
+          disabled={ disabledButton }
+          onClick={ () => registerUser() }
+          type="button"
+        >
+          Sign-up
+        </button>
       </div>
-      <button
-        disabled={ disabledButton }
-        onClick={ () => registerUser() }
-        type="button"
-      >
-        Registrar-se
-      </button>
     </div>
   );
 }

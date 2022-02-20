@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import http from '../api/http';
 import './style/editTask.css';
 
-function EditTask({ task, attTasks, setEditMode }) {
+function EditTask({ task, attTasks }) {
   const token = localStorage.getItem('token');
   const [taskToEdit, setTaskToEdit] = useState({ ...task });
   const [disabledButton, setdisabledButton] = useState(true);
@@ -20,12 +20,23 @@ function EditTask({ task, attTasks, setEditMode }) {
   const renderInputs = () => {
     const inputTitles = ['title', 'description', 'deadline'];
 
-    return inputTitles.map((title, index) => (
-      <label
-        htmlFor={ title }
-        key={ index }
-      >
+    return inputTitles.map((title, index) => {
+      if (title === 'description') {
+        return (
+          <textarea
+            key={ index }
+            className="edit-task-input-description"
+            name={ title }
+            value={ taskToEdit[title] }
+            onChange={ (e) => setTaskToEdit({ ...taskToEdit, [title]: e.target.value }) }
+            placeholder={ `${title} of your task` }
+          />
+        );
+      }
+
+      return (
         <input
+          key={ index }
           className="edit-task-input"
           name={ title }
           value={ taskToEdit[title] }
@@ -33,8 +44,8 @@ function EditTask({ task, attTasks, setEditMode }) {
           type={ title === 'deadline' ? 'date' : 'text' }
           placeholder={ `${title} of your task here` }
         />
-      </label>
-    ));
+      );
+    });
   };
 
   const renderOptions = () => {
@@ -58,22 +69,42 @@ function EditTask({ task, attTasks, setEditMode }) {
   };
 
   return (
-    <form>
-      { renderInputs() }
-      <select
-        className="edit-task-input"
-        name="status"
-        onChange={ (e) => setTaskToEdit({ ...taskToEdit, status: e.target.value }) }
+    <form
+      className="form-edit-task"
+    >
+      <div
+        className="edit-task-inputs"
       >
-        { renderOptions() }
-      </select>
-      <button
-        type="button"
-        disabled={ disabledButton }
-        onClick={ () => editTask() }
+        { renderInputs() }
+        <select
+          className="task-select-edit-status"
+          name="status"
+          onChange={ (e) => setTaskToEdit({ ...taskToEdit, status: e.target.value }) }
+        >
+          { renderOptions() }
+        </select>
+      </div>
+      <div
+        className="edit-task-button-container"
       >
-        Confirm edit!
-      </button>
+        <a href="#close" title="Close" className="close">
+          <button
+            type="button"
+            className="edit-task-button"
+            aria-label="Back to home button"
+          >
+            Back
+          </button>
+        </a>
+        <button
+          type="button"
+          className="create-task-button"
+          disabled={ disabledButton }
+          onClick={ () => editTask() }
+        >
+          Edit
+        </button>
+      </div>
     </form>
   );
 }
@@ -90,5 +121,4 @@ EditTask.propTypes = {
     _id: PropTypes.string,
   }).isRequired,
   attTasks: PropTypes.func.isRequired,
-  setEditMode: PropTypes.func.isRequired,
 };

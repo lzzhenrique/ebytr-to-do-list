@@ -33,7 +33,7 @@ describe('Testa comportamento da camada de models para tasks', async () => {
   const expectedTasks = [ 
     {
       _id: ObjectId('619cf05c1b42550e2b16e9cf'),
-      title: 'Ir ao mercadso',
+      title: 'Ir ao mercado',
       description: 'Comprar feijao e farinha',
       createdAt: '2020-02-16',
       deadline: '2020-02-19',

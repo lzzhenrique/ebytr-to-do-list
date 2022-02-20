@@ -27,32 +27,45 @@ function TaskMaker({ attTasks }) {
   };
 
   const renderInputs = () => {
-    const inputTitles = ['title', 'description', 'deadline'];
+    const inputTitles = ['title', 'deadline', 'description'];
 
-    return inputTitles.map((title, index) => (
-      <label
-        htmlFor={ title }
-        key={ index }
-      >
-        <p className="input-title">
-          { title === 'deadline' ? 'Due date' : title}
-        </p>
+    return inputTitles.map((title, index) => {
+      if (title === 'description') {
+        return (
+          <textarea
+            key={ index }
+            className="task-input-description"
+            name={ title }
+            onChange={ (e) => newTaskHandler(e.target) }
+            placeholder={ `${title} of your task` }
+          />
+        );
+      }
+
+      return (
         <input
+          key={ index }
           className="task-input"
           name={ title }
           onChange={ (e) => newTaskHandler(e.target) }
           type={ title === 'deadline' ? 'date' : 'text' }
           placeholder={ `${title} of your task` }
         />
-      </label>
-    ));
+      );
+    });
   };
 
   const renderOptions = () => {
     const statusOptions = ['Pending', 'In progress', 'Ready'];
 
     return statusOptions.map((option, index) => (
-      <option value={ option } key={ index }>{option}</option>
+      <option
+        className="task-input-select-option"
+        value={ option }
+        key={ index }
+      >
+        {option}
+      </option>
     ));
   };
 
@@ -74,7 +87,7 @@ function TaskMaker({ attTasks }) {
       >
         { renderInputs() }
         <select
-          className="task-input"
+          className="task-select-status"
           name="status"
           onChange={ (e) => newTaskHandler(e.target) }
         >
@@ -82,14 +95,24 @@ function TaskMaker({ attTasks }) {
         </select>
       </div>
       <div
-        className="create-task-button"
+        className="create-task-button-container"
       >
+        <a href="#close" title="Close" className="close">
+          <button
+            type="button"
+            className="create-task-button"
+            aria-label="Back to home button"
+          >
+            Back
+          </button>
+        </a>
         <button
           type="button"
+          className="create-task-button"
           disabled={ disabledButton }
           onClick={ () => createTask() }
         >
-          Add your task!
+          Add
         </button>
       </div>
     </form>

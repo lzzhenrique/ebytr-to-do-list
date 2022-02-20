@@ -63,54 +63,62 @@ function Home() {
   if (loading) return <h1>Carregando</h1>;
 
   return (
-    <div>
-      <div className="name-container">
-        <h1 className="name">Ebytr</h1>
+    <div className="home-container">
+      <div className="header-container">
+        <h1 className="title">Ebytr</h1>
       </div>
-      <div>
-        <div className="subtitle">
-          <h2>Add your task here!</h2>
-        </div>
+      <div className="sort-buttons-container">
+        <button
+          type="button"
+          onClick={ () => orderByDate() }
+          className="sort-button"
+        >
+          Creation
+        </button>
+        <button
+          type="button"
+          className="sort-button"
+          onClick={ () => orderByAlpha() }
+        >
+          A-Z
+        </button>
+        <button
+          type="button"
+          className="sort-button"
+          onClick={ () => orderByStatus() }
+        >
+          Status
+        </button>
+      </div>
+      <a className="call-modal" href="#modal">
+        <button
+          type="button"
+          className="call-modal-button"
+          aria-label="Back to home button"
+        >
+          Create Task!
+        </button>
+      </a>
+      <div
+        className="modal-container"
+        id="modal"
+      >
         <div className="task-maker-container">
           <TaskMaker
             attTasks={ attTasks }
           />
-          <div className="subtitle">
-            <h3>Order your tasks by: </h3>
-          </div>
         </div>
-        <div className="sort-buttons-container">
-          <button
-            type="button"
-            onClick={ () => orderByDate() }
-          >
-            Creation
-          </button>
-          <button
-            type="button"
-            onClick={ () => orderByAlpha() }
-          >
-            Alphabetically
-          </button>
-          <button
-            type="button"
-            onClick={ () => orderByStatus() }
-          >
-            Status
-          </button>
-
-        </div>
-        <div className="tasks-container">
-          {
-            userTasks.map((task, index) => (
-              <Task
-                attTasks={ attTasks }
-                task={ task }
-                key={ index }
-              />
-            ))
-          }
-        </div>
+      </div>
+      <div className="tasks-container">
+        {
+          userTasks.map((task, index) => (
+            <Task
+              attTasks={ attTasks }
+              task={ task }
+              key={ index }
+            />
+          ))
+        }
       </div>
     </div>
   );

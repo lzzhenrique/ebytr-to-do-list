@@ -34,8 +34,8 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1>Ebytr, sua todo list!</h1>
-      <div className="login-div">
+      <h1 className="title">Ebytr</h1>
+      <form className="login-div">
         <input
           className="login-input"
           name="email"
@@ -50,14 +50,14 @@ function Login() {
           placeholder="Password"
           onChange={ (e) => handleChange(e.target) }
         />
-      </div>
+      </form>
       <div className="login-buttons">
         <button
           className="login-button"
           type="button"
           onClick={ () => navigate('/register') }
         >
-          Registrar-se
+          Sign up
         </button>
         <button
           className="login-button"
@@ -65,7 +65,7 @@ function Login() {
           onClick={ () => makeLogin() }
           type="button"
         >
-          Entrar
+          Login
         </button>
       </div>
     </div>
