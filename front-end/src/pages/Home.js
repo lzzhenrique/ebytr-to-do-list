@@ -4,44 +4,8 @@ import { Task, TaskMaker } from '../components';
 import './style/home.css';
 
 import http from '../api/http';
-
-const UNAUTHORIZED = 401;
-
-const orderByDate = () => {
-  const order = userTasks.sort((a, b) => {
-    const taskADate = new Date(a.createdAt);
-    const taskBDate = new Date(b.createdAt);
-
-    return taskADate - taskBDate;
-  });
-  setUserTasks([...order]);
-};
-
-const orderByAlpha = () => {
-  const orderAlpha = userTasks.sort((a, b) => {
-    const taskATitle = a.title.toLowerCase();
-    const taskBTitle = b.title.toLowerCase();
-    const LESS = -1;
-
-    if (taskATitle < taskBTitle) return LESS;
-    if (taskATitle > taskBTitle) return 1;
-    return 0;
-  });
-  setUserTasks([...orderAlpha]);
-};
-
-const orderByStatus = () => {
-  const order = userTasks.sort((a, b) => {
-    const taskAStatus = a.status.toLowerCase();
-    const taskBStatus = b.status.toLowerCase();
-    const LESS = -1;
-
-    if (taskAStatus < taskBStatus) return LESS;
-    if (taskAStatus > taskBStatus) return 1;
-    return 0;
-  });
-  setUserTasks([...order]);
-};
+import sortFuncs from '../helpers/sortTasks';
+import USER_UNAUTHORIZED from '../helpers/apiErrors';
 
 function Home() {
   const navigate = useNavigate();
@@ -53,7 +17,7 @@ function Home() {
   useEffect(() => {
     const getAllTasks = async () => {
       const result = await http.getAllTasks(token);
-      if (result === UNAUTHORIZED || !token) return navigate('/login');
+      if (result === USER_UNAUTHORIZED || !token) return navigate('/login');
       setUserTasks(result);
       setLoading(false);
     };
@@ -75,35 +39,37 @@ function Home() {
       <div className="sort-buttons-container">
         <button
           type="button"
-          onClick={ () => orderByDate() }
+          onClick={ () => sortFuncs.date(userTasks, setUserTasks) }
           className="sort-button"
         >
-          Creation
+          Date
         </button>
         <button
           type="button"
           className="sort-button"
-          onClick={ () => orderByAlpha() }
+          onClick={ () => sortFuncs.alpha(userTasks, setUserTasks) }
         >
           A-Z
         </button>
         <button
           type="button"
           className="sort-button"
-          onClick={ () => orderByStatus() }
+          onClick={ () => sortFuncs.status(userTasks, setUserTasks) }
         >
           Status
         </button>
       </div>
-      <a className="call-modal" href="#modal">
-        <button
-          type="button"
-          className="call-modal-button"
-          aria-label="Back to home button"
-        >
-          Create Task!
-        </button>
-      </a>
+      <div className="call-modal-container">
+        <a className="call-modal" href="#modal">
+          <button
+            type="button"
+            className="call-modal-button"
+            aria-label="Back to home button"
+          >
+            Create Task!
+          </button>
+        </a>
+      </div>
       <div
         className="modal-container"
         id="modal"

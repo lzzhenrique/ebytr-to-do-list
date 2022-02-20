@@ -4,6 +4,12 @@
   margin-bottom: 1rem;
 }
 
+.call-modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .header-container {
   display: flex;
   justify-content: center;
@@ -77,9 +83,6 @@
   margin-bottom: 1rem;
 }
 
-.call-modal {
-  margin-left: 43%;
-}
 .call-modal-button {
   font-size: large;
   font-weight: bold;

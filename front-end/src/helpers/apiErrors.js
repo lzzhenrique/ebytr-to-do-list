@@ -1,0 +1,3 @@
+const USER_UNAUTHORIZED = 401;
+
+export default USER_UNAUTHORIZED;
