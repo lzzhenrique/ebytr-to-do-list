@@ -6,7 +6,7 @@ const error = require('../middlewares/err');
 const app = express();
 
 app.use(cors({
-  origin: 'https://ebytr-to-do-list-50statlo6-lzzhenrique.vercel.app',
+  origin: 'https://ebytr-to-do-list.vercel.app',
   methods: ['POST', 'GET', 'DELETE', 'PUT'],
 }));
 
