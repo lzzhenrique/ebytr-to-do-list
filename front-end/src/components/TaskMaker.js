@@ -33,13 +33,14 @@ function TaskMaker({ attTasks }) {
       if (title === 'description') {
         return (
           <textarea
-            className="task-description"
+            className="task-input-description"
             name={ title }
             onChange={ (e) => newTaskHandler(e.target) }
             placeholder={ `${title} of your task` }
           />
         );
       }
+
       return (
         <input
           key={ index }
@@ -57,7 +58,13 @@ function TaskMaker({ attTasks }) {
     const statusOptions = ['Pending', 'In progress', 'Ready'];
 
     return statusOptions.map((option, index) => (
-      <option value={ option } key={ index }>{option}</option>
+      <option
+        className="task-input-select-option"
+        value={ option }
+        key={ index }
+      >
+        {option}
+      </option>
     ));
   };
 
@@ -79,7 +86,7 @@ function TaskMaker({ attTasks }) {
       >
         { renderInputs() }
         <select
-          className="task-input"
+          className="task-input-select-status"
           name="status"
           onChange={ (e) => newTaskHandler(e.target) }
         >
@@ -87,14 +94,24 @@ function TaskMaker({ attTasks }) {
         </select>
       </div>
       <div
-        className="create-task-button"
+        className="create-task-button-container"
       >
+        <a href="#close" title="Close" className="close">
+          <button
+            type="button"
+            className="create-task-button"
+            aria-label="Back to home button"
+          >
+            Back
+          </button>
+        </a>
         <button
           type="button"
+          className="create-task-button"
           disabled={ disabledButton }
           onClick={ () => createTask() }
         >
-          Add your task!
+          Add task!
         </button>
       </div>
     </form>

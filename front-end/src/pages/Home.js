@@ -90,12 +90,19 @@ function Home() {
           Status
         </button>
       </div>
-      <a href="#modal">Create task</a>
+      <a href="#modal">
+        <button
+          type="button"
+          className="call-modal-button"
+          aria-label="Back to home button"
+        >
+          Create Task!
+        </button>
+      </a>
       <div
         className="modal-container"
         id="modal"
       >
-        <a href="#close" title="Close" className="close">x</a>
         <div className="task-maker-container">
           <TaskMaker
             attTasks={ attTasks }

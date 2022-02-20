@@ -11,21 +11,33 @@
   flex-direction: column;
 }
 
-.task-description {
+.task-input-select-status {
+  width: 27rem;
+  margin-bottom: 1rem;
+  height: 5rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: lighter;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.task-input-description {
   padding: 1rem;
   width: 25rem;
   height: 8rem;
-  margin: 1rem;
+  margin-bottom: 1rem;
   border: none;
   border-radius: 10px;
   font-weight: lighter;
   font-size: x-large;
 }
+
 .task-input {
   padding: 1rem;
   width: 25rem;
   height: 2rem;
-  margin: 1rem;
+  margin-bottom: 1rem;
   border: none;
   border-radius: 10px;
   font-weight: lighter;
@@ -35,4 +47,16 @@
 .input-title {
   margin: 0;
   padding: 0;
+}
+
+.create-task-button:disabled {
+  cursor: auto
+}
+
+.create-task-button {
+  font-size: large;
+  font-weight: bold;
+  color: #202C39;
+  margin: 1rem 2rem;
+  width: 8rem;
 }
