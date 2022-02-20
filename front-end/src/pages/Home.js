@@ -90,7 +90,7 @@ function Home() {
           Status
         </button>
       </div>
-      <a href="#modal">
+      <a className="call-modal" href="#modal">
         <button
           type="button"
           className="call-modal-button"

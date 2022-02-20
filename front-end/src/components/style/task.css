@@ -1,10 +1,49 @@
 .task-card {
   border-radius: 10px;
-  border: 2px #C7EDE4 solid;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 1rem;
   padding: 1rem;
+  box-shadow: 20px 20px 40px #1b1c1b, -25px -25px 50px #1d2731;
+}
+
+/* .task-card:hover {
+  transform: scale(1.1);
+  transition: .5s ease;
+} */
+
+.manage-task-button:hover  {
+  transform: scale(1.0);
+}
+
+.manage-task-button {
+  width: 6rem;
+  height: 3rem;
+  font-size: large;
+  font-weight: bold;
+  color: #202C39;
+}
+
+.edit-modal-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+
+.edit-modal-container:target {
+  opacity: 1;
+  pointer-events: auto;
 }

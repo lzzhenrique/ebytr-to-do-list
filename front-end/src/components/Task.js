@@ -17,7 +17,6 @@ function Task(
     title,
     _id: id,
   });
-  const [editMode, setEditMode] = useState(false);
 
   const deleteTask = async () => {
     await http.deleteTask({ token, id });
@@ -39,27 +38,30 @@ function Task(
       <p>{`Status: ${status}`}</p>
       <div className="task-buttons">
         <button
+          className="manage-task-button"
           type="button"
           onClick={ () => deleteTask() }
         >
-          Remove Task
+          Remove
         </button>
-        <button
-          type="button"
-          onClick={ () => setEditMode(!editMode) }
-        >
-          Edit task
-        </button>
+        <a href={ `#edit-task${id}` }>
+          <button
+            aria-label="Edit task button"
+            className="manage-task-button"
+            type="button"
+          >
+            Edit
+          </button>
+        </a>
       </div>
-      {
-        editMode ? (
+      <div id={ `edit-task${id}` } className="edit-modal-container">
+        <div className="edit-task-container">
           <EditTask
             task={ task }
             attTasks={ attTasks }
-            setEditMode={ setEditMode }
           />
-        ) : ''
-      }
+        </div>
+      </div>
     </div>
   );
 }

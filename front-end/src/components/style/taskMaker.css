@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-.task-input-select-status {
+.task-select-status {
   width: 27rem;
   margin-bottom: 1rem;
   height: 5rem;

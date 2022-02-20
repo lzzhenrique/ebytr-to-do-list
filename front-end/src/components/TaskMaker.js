@@ -86,7 +86,7 @@ function TaskMaker({ attTasks }) {
       >
         { renderInputs() }
         <select
-          className="task-input-select-status"
+          className="task-select-status"
           name="status"
           onChange={ (e) => newTaskHandler(e.target) }
         >
@@ -111,7 +111,7 @@ function TaskMaker({ attTasks }) {
           disabled={ disabledButton }
           onClick={ () => createTask() }
         >
-          Add task!
+          Add
         </button>
       </div>
     </form>
