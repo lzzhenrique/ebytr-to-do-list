@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import http from '../api/http';
 import './style/editTask.css';
 
-function EditTask({ task, attTasks, setEditMode }) {
+function EditTask({ task, attTasks }) {
   const token = localStorage.getItem('token');
   const [taskToEdit, setTaskToEdit] = useState({ ...task });
   const [disabledButton, setdisabledButton] = useState(true);
@@ -24,6 +24,7 @@ function EditTask({ task, attTasks, setEditMode }) {
       if (title === 'description') {
         return (
           <textarea
+            key={ index }
             className="edit-task-input-description"
             name={ title }
             value={ taskToEdit[title] }
@@ -120,5 +121,4 @@ EditTask.propTypes = {
     _id: PropTypes.string,
   }).isRequired,
   attTasks: PropTypes.func.isRequired,
-  setEditMode: PropTypes.func.isRequired,
 };

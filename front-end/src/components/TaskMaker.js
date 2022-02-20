@@ -33,6 +33,7 @@ function TaskMaker({ attTasks }) {
       if (title === 'description') {
         return (
           <textarea
+            key={ index }
             className="task-input-description"
             name={ title }
             onChange={ (e) => newTaskHandler(e.target) }
