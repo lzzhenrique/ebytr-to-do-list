@@ -7,9 +7,9 @@
 
 ## 🖥️ Using the application
 
-    If you wanna visit the application, click [here](https://ebytr-to-do-list.vercel.app/).
+  If you wanna visit the application, click [here](https://ebytr-to-do-list.vercel.app/).
     
-    If you download them and check locally, just follow the Initial Setup topic.
+  If you download them and check locally, just follow the Initial Setup topic.
 
 ## ⚙️ Initial Setup:
   Besides this tools that i comment above, this project consume others libraries to work properly. Follow the step-by-step below to install them.
